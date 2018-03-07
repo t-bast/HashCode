@@ -3,11 +3,14 @@ module Types where
 type Bonus = Int
 type Distance = Int
 type Time = Int
+type Row = Int
+type Column = Int
+type Position = (Row, Column)
 
-data Ride = Ride { startRow :: Int
-                 , startCol :: Int
-                 , endRow :: Int
-                 , endCol :: Int
+data Ride = Ride { startRow :: Row
+                 , startCol :: Column
+                 , endRow :: Row
+                 , endCol :: Column
                  , startTime :: Time
                  , endTime :: Time
                  } deriving (Show)

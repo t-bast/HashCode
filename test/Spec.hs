@@ -1,2 +1,6 @@
+import Test.Hspec
+
+import qualified Spec.Score
+
 main :: IO ()
-main = putStrLn "Test suite not yet implemented"
+main = hspec Spec.Score.spec
