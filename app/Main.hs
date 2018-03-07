@@ -1,5 +1,6 @@
 module Main (main) where
 
+import Data.List
 import Types
 
 main :: IO ()
@@ -10,7 +11,7 @@ main = do
 parse :: IO Params
 parse = do
     input   <- getLine
-    content <- readFile ("inputs/" ++ input)
+    content <- readFile ("inputs/" ++ input ++ ".in")
     let inputLines = lines content
     let [r, c, f, n, b, t] =
             map (\x -> read x :: Int) . words . head $ inputLines
@@ -35,3 +36,12 @@ parseRide r =
             , startTime = s
             , endTime   = f
             }
+
+outputSolution :: String -> Solution -> IO ()
+outputSolution input sol = do
+    let outputs = map outputVehicle sol
+    writeFile ("outputs/" ++ input ++ ".out") (intercalate "\n" outputs)
+  where
+    outputVehicle :: Rides -> String
+    outputVehicle rides =
+        show (length rides) ++ " " ++ unwords (map show rides)

@@ -19,3 +19,8 @@ data Params = Params { rows :: Int
                      , bonus :: Bonus
                      , steps :: Time
                      } deriving (Show)
+
+-- Rides are represented by their index in the Params record.
+type Rides = [Int]
+-- A solution is a list of rides (how the rides are split between vehicles).
+type Solution = [Rides]
