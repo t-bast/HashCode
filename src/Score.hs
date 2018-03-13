@@ -10,16 +10,17 @@ score :: Params -> Solution -> Int
 score p s = sum $ map (scoreRides p (-1) (0, 0)) s
 
 scoreRides :: Params -> Time -> Position -> Rides -> Int
-scoreRides _ _ _   []     = 0
-scoreRides p t pos (r:rs) = s + scoreRides p t' pos' rs
-  where
-    ride          = rides p !! r
-    rideDist      = rideDistance ride
-    (s, t', pos') = scoreRide t pos ride
-    scoreRide :: Time -> Position -> Ride -> (Int, Time, Position)
-    scoreRide t pos r
-        | t + startDist <= startTime r
-        = (bonus p + rideDist, startTime r + rideDist, (endRow r, endCol r))
-        | otherwise
-        = (rideDist, t + startDist + rideDist, (endRow r, endCol r))
-        where startDist = distance pos (startRow r, startCol r)
+scoreRides _ _ _   []       = 0
+scoreRides p t pos (r : rs) = s + scoreRides p t' pos' rs
+ where
+  ride          = rides p !! r
+  rideDist      = rideDistance ride
+  (s, t', pos') = scoreRide t pos ride
+  scoreRide :: Time -> Position -> Ride -> (Int, Time, Position)
+  scoreRide t pos r
+    | t + startDist <= startTime r
+    = (bonus p + rideDist, startTime r + rideDist, (endRow r, endCol r))
+    | otherwise
+    = (rideDist, t + startDist + rideDist, (endRow r, endCol r))
+    where startDist = distance pos (startRow r, startCol r)
+
