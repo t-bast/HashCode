@@ -1,16 +1,17 @@
 module Main (main) where
 
 import Data.List
+import Greedy
 import Types
 
 main :: IO ()
 main = do
-    params <- parse
-    print $ params
+    input  <- getLine
+    params <- parse input
+    outputSolution input $ solve params
 
-parse :: IO Params
-parse = do
-    input   <- getLine
+parse :: String -> IO Params
+parse input = do
     content <- readFile ("inputs/" ++ input ++ ".in")
     let inputLines = lines content
     let [r, c, f, n, b, t] =
