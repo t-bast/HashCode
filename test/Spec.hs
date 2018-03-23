@@ -1,6 +1,9 @@
 import Test.Hspec
 
+import qualified Spec.Distance
 import qualified Spec.Score
 
 main :: IO ()
-main = hspec Spec.Score.spec
+main = hspec $ do
+    Spec.Score.spec
+    Spec.Distance.spec
